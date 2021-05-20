@@ -9,9 +9,9 @@
 	<version>1.0-SNAPSHOT</version>
 
 	<properties>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
-		<antlr.runtimer.version>4.9.2</antlr.runtimer.version>
+		<java.version>11</java.version>
+		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+		<antlr4-runtime.version>4.9.2</antlr4-runtime.version>
 	</properties>
 
 	<dependencies>
@@ -19,12 +19,25 @@
 		<dependency>
 			<groupId>org.antlr</groupId>
 			<artifactId>antlr4-runtime</artifactId>
-			<version>${antlr.runtimer.version}</version>
+			<version>${antlr4-runtime.version}</version>
 		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<release>${java.version}</release>
+				</configuration>
+			</plugin>
+
+			<!-- https://mvnrepository.com/artifact/org.antlr/antlr4-maven-plugin -->
 			<plugin>
 				<groupId>org.antlr</groupId>
 				<artifactId>antlr4-maven-plugin</artifactId>
@@ -34,6 +47,10 @@
 						<goals>
 							<goal>antlr4</goal>
 						</goals>
+						<configuration>
+							<listener>false</listener>
+							<visitor>true</visitor>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
