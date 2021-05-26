@@ -10,10 +10,12 @@ ADD:        '+';
 SUBTRACT:   '-';
 MULTIPLY:   '*';
 DIVIDE:     '/';
+
 EXPONENT:   '^';
-SINE:       '%';
-COSINE:     '$';
-TANGENT:    '@';
+
+SINE:       '@';
+COSINE:     '#';
+TANGENT:    '$';
 
 WHITESPACE: [ \r\n\t] -> skip;
 
