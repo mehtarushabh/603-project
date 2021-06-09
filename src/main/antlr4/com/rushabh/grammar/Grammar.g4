@@ -1,36 +1,33 @@
 grammar Grammar;
 
-/*
- * Tokens
- */
+//Tokens
 
-INTEGER: [0-9];
+INTEGER: [0-9]+;
 
-ADD:        '+';
-SUBTRACT:   '-';
-MULTIPLY:   '*';
-DIVIDE:     '/';
+ADD:                    '+';
+SUBTRACT:               '-';
+MULTIPLY:               '*';
+DIVIDE:                 '/';
 
-EXPONENT:   '^';
+EXPONENT:               '^';
 
-SINE:       '@';
-COSINE:     '#';
-TANGENT:    '$';
+SINE:                   '@';
+COSINE:                 '#';
+TANGENT:                '$';
+LOGARITHM:              '!';
 
 WHITESPACE: [ \r\n\t] -> skip;
 
 
-/*
- * Production Rules
- */
+//Production Rules
 
-start : expression;
+start: expression;
 
 expression
-   : INTEGER                                                                    # Integer
-   | '(' inner = expression ')'                                                 # Parentheses
-   | left = expression operator = EXPONENT right = expression                   # Exponent
-   | left = expression operator = (MULTIPLY | DIVIDE) right = expression        # MultiplicationOrDivision
-   | operator = (SINE | COSINE | TANGENT) right = expression                    # TrigonometricFunctions
-   | left = expression operator = (ADD | SUBTRACT) right = expression           # AdditionOrSubtraction
+   : INTEGER                                                                           # Integer
+   | '(' inner = expression ')'                                                        # Parentheses
+   | left = expression operation = EXPONENT right = expression                         # Exponent
+   | operation = (SINE | COSINE | TANGENT | LOGARITHM) right = expression              # ScientificFunction
+   | left = expression operation = (MULTIPLY | DIVIDE) right = expression              # MultiplicationOrDivision
+   | left = expression operation = (ADD | SUBTRACT) right = expression                 # AdditionOrSubtraction
    ;
